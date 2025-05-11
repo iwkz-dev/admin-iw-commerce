@@ -6,16 +6,25 @@ import { useEffect } from 'react';
 
 export const EventInitializer = () => {
   const setEvents = useEventStore((state) => state.setEvents);
+  const setLoading = useEventStore((state) => state.setLoading);
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await fetch('/api/events');
-      const data: { events: Event[] } = await res.json();
-      setEvents(data.events);
+      setLoading(true);
+      try {
+        const res = await fetch('/api/events');
+        const data: { events: Event[] } = await res.json();
+        setEvents(data.events);
+      } catch (error) {
+        console.error('Failed to fetch events', error);
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchEvents();
-  }, [setEvents]);
+  }, [setEvents, setLoading]);
 
-  return null; // No UI, just logic
+  return null;
 };
