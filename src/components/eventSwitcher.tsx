@@ -10,15 +10,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { useEventStore } from '@/store/eventStore';
+import { useEffect } from 'react';
 
-export function EventSwitcher({
-  versions,
-  defaultVersion,
-}: {
-  versions: string[];
-  defaultVersion: string;
-}) {
-  const [selectedEvent, setSelectedEvent] = React.useState(defaultVersion);
+export function EventSwitcher() {
+  const events = useEventStore((s) => s.events);
+  const selectedEvent = useEventStore((s) => s.selectedEvent);
+  const setSelectedEvent = useEventStore((s) => s.setSelectedEvent);
+
+  useEffect(() => {
+    setSelectedEvent(events[0]);
+  }, [events, setSelectedEvent]);
 
   return (
     <SidebarMenu>
@@ -34,15 +36,15 @@ export function EventSwitcher({
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-medium">Event</span>
-                <span className="">{selectedEvent}</span>
+                <span className="">{selectedEvent?.name}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-(--radix-dropdown-menu-trigger-width)" align="start">
-            {versions.map((version) => (
-              <DropdownMenuItem key={version} onSelect={() => setSelectedEvent(version)}>
-                {version} {version === selectedEvent && <Check className="ml-auto" />}
+            {events.map((event) => (
+              <DropdownMenuItem key={event.id} onSelect={() => setSelectedEvent(event)}>
+                {event.name} {event.id === selectedEvent?.id && <Check className="ml-auto" />}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>

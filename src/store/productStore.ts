@@ -1,8 +1,9 @@
+import { Product } from '@/types/product.types';
 import { create } from 'zustand';
 
 interface ProductState {
-  products: any[];
-  setProducts: (items: any[]) => void;
+  products: Product[];
+  setProducts: (items: Product[]) => void;
 }
 
 export const useProductStore = create<ProductState>()((set) => ({
