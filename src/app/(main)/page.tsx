@@ -1,12 +1,14 @@
 'use client';
 
+import { EventFormPopup } from '@/components/forms/event-form-popup';
 import { Button } from '@/components/ui/button';
 import { useEventStore } from '@/store/eventStore';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Page = () => {
   const eventLoading = useEventStore((s) => s.loading);
   const events = useEventStore((s) => s.events);
+  const [open, setOpen] = useState(false);
 
   if (eventLoading)
     return (
@@ -23,7 +25,8 @@ const Page = () => {
   if (events.length === 0)
     return (
       <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
-        <Button>Create Event</Button>
+        <Button onClick={() => setOpen(true)}>Open Form</Button>
+        <EventFormPopup open={open} onOpenChange={setOpen} />
       </div>
     );
 

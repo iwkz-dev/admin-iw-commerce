@@ -1,5 +1,5 @@
-import { AppSidebar } from '@/components/appSidebar';
-import { EventInitializer } from '@/components/eventInitializer';
+import { AppSidebar } from '@/components/app-sidebar';
+import { EventInitializer } from '@/components/initializer/event-initializer';
 // import {
 //   Breadcrumb,
 //   BreadcrumbItem,

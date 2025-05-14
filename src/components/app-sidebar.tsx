@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { EventSwitcher } from '@/components/eventSwitcher';
+import { EventSwitcher } from '@/components/event-switcher';
 import {
   Sidebar,
   SidebarContent,

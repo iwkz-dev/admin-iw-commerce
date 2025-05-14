@@ -35,7 +35,6 @@ export async function GET(): Promise<NextResponse> {
   // }
 
   return NextResponse.json({
-    // events: mockEvents,
-    events: [],
+    events: mockEvents,
   });
 }
