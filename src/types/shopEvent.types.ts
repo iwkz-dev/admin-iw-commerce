@@ -1,4 +1,4 @@
-export interface Event {
+export interface ShopEvent {
   id: number;
   name: string;
   startTime: string;

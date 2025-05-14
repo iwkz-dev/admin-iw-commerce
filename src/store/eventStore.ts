@@ -1,12 +1,12 @@
-import { Event } from '@/types/event.types';
+import { ShopEvent } from '@/types/shopEvent.types';
 import { create } from 'zustand';
 
 interface EventState {
-  selectedEvent: Event | null;
-  events: Event[];
+  selectedEvent: ShopEvent | null;
+  events: ShopEvent[];
   loading: boolean;
-  setSelectedEvent: (item: Event) => void;
-  setEvents: (items: Event[]) => void;
+  setSelectedEvent: (item: ShopEvent) => void;
+  setEvents: (items: ShopEvent[]) => void;
   setLoading: (loading: boolean) => void;
 }
 

@@ -1,5 +1,4 @@
 export interface SidebarNav {
-  events: string[];
   navMain: NavItem[];
 }
 

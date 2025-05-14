@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { EventSwitcher } from '@/components/event-switcher';
+import { EventSwitcher } from '@/components/sidebar/event-switcher';
 import {
   Sidebar,
   SidebarContent,
@@ -15,46 +15,11 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { SidebarNav } from '@/types/menu.types';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useEventStore } from '@/store/eventStore';
-
-const data: SidebarNav = {
-  events: ['SASO', 'Toko Iwkz', 'Donasi'],
-  navMain: [
-    {
-      title: 'Dashboard',
-      url: '#',
-      items: [],
-    },
-    {
-      title: 'Products',
-      url: '#',
-      items: [
-        {
-          title: 'Product list',
-          url: '#',
-        },
-        {
-          title: 'Product variant',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'User',
-      url: '#',
-      items: [
-        {
-          title: 'User list',
-          url: '#',
-        },
-      ],
-    },
-  ],
-};
+import { sidebarNavData } from '@/data/sidebar';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const events = useEventStore((s) => s.events);
@@ -66,7 +31,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>
-        {data.navMain.map((item) =>
+        {sidebarNavData.navMain.map((item) =>
           item.items.length === 0 ? (
             <SidebarGroup key={item.title}>
               <SidebarMenuButton asChild>

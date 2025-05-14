@@ -1,7 +1,7 @@
 'use client';
 
 import { useEventStore } from '@/store/eventStore';
-import { Event } from '@/types/event.types';
+import { ShopEvent } from '@/types/shopEvent.types';
 import { useEffect } from 'react';
 
 export const EventInitializer = () => {
@@ -13,7 +13,7 @@ export const EventInitializer = () => {
       setLoading(true);
       try {
         const res = await fetch('/api/events');
-        const data: { events: Event[] } = await res.json();
+        const data: { events: ShopEvent[] } = await res.json();
         setEvents(data.events);
       } catch (error) {
         console.error('Failed to fetch events', error);

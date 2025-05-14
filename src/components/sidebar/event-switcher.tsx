@@ -35,7 +35,7 @@ export function EventSwitcher() {
                 <GalleryVerticalEnd className="size-4" />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-medium">Event</span>
+                <span className="font-medium">ShopEvent</span>
                 <span className="">{selectedEvent?.name}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
