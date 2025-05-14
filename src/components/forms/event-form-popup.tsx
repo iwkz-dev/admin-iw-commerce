@@ -103,7 +103,7 @@ export function EventFormPopup({ open, onOpenChange }: FormPopupProps) {
         }}
       >
         <DialogHeader>
-          <DialogTitle>Create New Item</DialogTitle>
+          <DialogTitle>Create New Event</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>

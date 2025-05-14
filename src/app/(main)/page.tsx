@@ -3,6 +3,7 @@
 import EventDetails from '@/components/event-details';
 import { EventFormPopup } from '@/components/forms/event-form-popup';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { useEventStore } from '@/store/eventStore';
 import React, { useState } from 'react';
 
@@ -27,14 +28,17 @@ const Page = () => {
   if (events.length === 0 || !selectedEvent)
     return (
       <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
-        <Button onClick={() => setOpen(true)}>Open Form</Button>
+        <Button onClick={() => setOpen(true)}>Create Event</Button>
         <EventFormPopup open={open} onOpenChange={setOpen} />
       </div>
     );
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
-      CONTENT HERE
+      <Card className="flex flex-col items-end p-4">
+        <Button onClick={() => setOpen(true)}>Create New Event</Button>
+        <EventFormPopup open={open} onOpenChange={setOpen} />
+      </Card>
       <EventDetails event={selectedEvent} />
     </div>
   );
