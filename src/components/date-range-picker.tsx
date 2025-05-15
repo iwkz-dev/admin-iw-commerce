@@ -1,23 +1,26 @@
-"use client"
+'use client';
 
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
-import type { DateRange } from "react-day-picker"
-import { cn } from "@/lib/utils"
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import type { DateRange } from 'react-day-picker';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import type { Control, FieldValues, Path } from 'react-hook-form';
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import type { Control } from "react-hook-form"
-
-interface DateRangePickerProps {
-  control: Control<any>
-  name: string
-  label: string
+interface DateRangePickerProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
+  label: string;
 }
 
-export function DateRangePicker({ control, name, label }: DateRangePickerProps) {
+export function DateRangePicker<T extends FieldValues>({
+  control,
+  name,
+  label,
+}: DateRangePickerProps<T>) {
   return (
     <FormField
       control={control}
@@ -29,17 +32,21 @@ export function DateRangePicker({ control, name, label }: DateRangePickerProps) 
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
-                  variant={"outline"}
-                  className={cn("w-full justify-start text-left font-normal", !field.value && "text-muted-foreground")}
+                  variant={'outline'}
+                  className={cn(
+                    'w-full justify-start text-left font-normal',
+                    !field.value && 'text-muted-foreground',
+                  )}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {field.value?.from ? (
                     field.value.to ? (
                       <>
-                        {format(field.value.from, "LLL dd, y")} - {format(field.value.to, "LLL dd, y")}
+                        {format(field.value.from, 'LLL dd, y')} -{' '}
+                        {format(field.value.to, 'LLL dd, y')}
                       </>
                     ) : (
-                      format(field.value.from, "LLL dd, y")
+                      format(field.value.from, 'LLL dd, y')
                     )
                   ) : (
                     <span>Select date range</span>
@@ -62,5 +69,5 @@ export function DateRangePicker({ control, name, label }: DateRangePickerProps) 
         </FormItem>
       )}
     />
-  )
+  );
 }

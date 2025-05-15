@@ -10,6 +10,7 @@ import { EventInitializer } from '@/components/initializer/event-initializer';
 // } from '@/components/ui/breadcrumb';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import GlobalPanel from '@/components/global-panel';
 
 export default function Layout({
   children,
@@ -37,6 +38,7 @@ export default function Layout({
               </BreadcrumbList>
             </Breadcrumb> */}
           </header>
+          <GlobalPanel />
           {children}
         </SidebarInset>
       </SidebarProvider>

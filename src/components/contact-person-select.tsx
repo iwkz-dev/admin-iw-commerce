@@ -1,27 +1,38 @@
-"use client"
+'use client';
 
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-import { Button } from "@/components/ui/button"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import type { Control } from "react-hook-form"
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import type { Control, FieldValues, Path } from 'react-hook-form';
 
 interface Person {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
 
-interface ContactPersonSelectProps {
-  control: Control<any>
-  name: string
-  label: string
-  options: Person[]
+interface ContactPersonSelectProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
+  label: string;
+  options: Person[];
 }
 
-export function ContactPersonSelect({ control, name, label, options }: ContactPersonSelectProps) {
+export function ContactPersonSelect<T extends FieldValues>({
+  control,
+  name,
+  label,
+  options,
+}: ContactPersonSelectProps<T>) {
   return (
     <FormField
       control={control}
@@ -35,7 +46,7 @@ export function ContactPersonSelect({ control, name, label, options }: ContactPe
                 <Button
                   variant="outline"
                   role="combobox"
-                  className={cn("w-full justify-between", !field.value && "text-muted-foreground")}
+                  className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
                 >
                   {field.value
                     ? options.find((option) => option.id === field.value)?.name
@@ -55,11 +66,14 @@ export function ContactPersonSelect({ control, name, label, options }: ContactPe
                         key={option.id}
                         value={option.id}
                         onSelect={() => {
-                          field.onChange(option.id)
+                          field.onChange(option.id);
                         }}
                       >
                         <Check
-                          className={cn("mr-2 h-4 w-4", option.id === field.value ? "opacity-100" : "opacity-0")}
+                          className={cn(
+                            'mr-2 h-4 w-4',
+                            option.id === field.value ? 'opacity-100' : 'opacity-0',
+                          )}
                         />
                         {option.name}
                       </CommandItem>
@@ -73,5 +87,5 @@ export function ContactPersonSelect({ control, name, label, options }: ContactPe
         </FormItem>
       )}
     />
-  )
+  );
 }
