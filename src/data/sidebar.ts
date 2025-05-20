@@ -4,20 +4,20 @@ export const sidebarNavData: SidebarNav = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '#',
+      url: '/',
       items: [],
     },
     {
       title: 'Products',
-      url: '#',
+      url: '',
       items: [
         {
           title: 'Product list',
-          url: '#',
+          url: '/products',
         },
         {
           title: 'Product variant',
-          url: '#',
+          url: '/products-variant',
         },
       ],
     },
