@@ -39,11 +39,12 @@ const Page = () => {
         <TableCaption>Product List</TableCaption>
         <TableHeader>
           <TableRow>
-            {Object.keys(products[0]).map((key, i) => (
-              <TableHead className="w-[100px]" key={i}>
-                {key}
-              </TableHead>
-            ))}
+            {products[0] &&
+              Object.keys(products[0]).map((key, i) => (
+                <TableHead className="w-[100px]" key={i}>
+                  {key}
+                </TableHead>
+              ))}
           </TableRow>
         </TableHeader>
         <TableBody>
