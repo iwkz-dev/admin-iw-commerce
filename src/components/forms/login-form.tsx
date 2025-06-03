@@ -7,27 +7,36 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    const newErrors: typeof errors = {};
-    if (!email.includes('@')) newErrors.email = 'Invalid email address';
-    if (password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+    // const newErrors: typeof errors = {};
+    // if (!email.includes('@')) newErrors.email = 'Invalid email address';
+    // if (password.length < 6) newErrors.password = 'Password must be at least 6 characters';
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+    // if (Object.keys(newErrors).length > 0) {
+    //   setErrors(newErrors);
+    //   return;
+    // }
 
     console.log('send data:', { email, password });
-    // You can now send the email/password to your API
+    await signIn('credentials', {
+      email,
+      password,
+      redirect: true,
+      callbackUrl,
+    });
   };
 
   return (
