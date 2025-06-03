@@ -39,7 +39,7 @@ export default function Layout({
             </Breadcrumb> */}
           </header>
           <GlobalPanel />
-          {children}
+          <div className="p-4 pt-0">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </>

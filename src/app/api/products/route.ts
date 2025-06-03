@@ -1,28 +1,20 @@
+import { auth } from '@/auth';
 import { NextResponse } from 'next/server';
 
-const mockProducts = [
-  {
-    id: 1,
-    name: 'Sate Ayam',
-    description: 'Sate ayam enak banget',
-    basePrice: 12,
-    stock: 100,
-    hasVariant: false,
-    eventId: 1,
-    categoryId: 1,
-    createdAt: '2025-05-01T22:06:54+00:00',
-    updatedAt: '2025-05-01T22:09:07.546572+00:00',
-    imageUrls: [],
-    productVariantIds: [],
-  },
-];
-
 export async function GET(): Promise<NextResponse> {
-  // if (error) {
-  //   return NextResponse.json({ error: error.message }, { status: 500 });
-  // }
+  const session = await auth();
 
-  return NextResponse.json({
-    products: mockProducts,
+  if (!session || !session.accessToken) {
+    return new NextResponse('Unauthorized', { status: 401 });
+  }
+  const accessToken = session.accessToken;
+  const response = await fetch(`${process.env.BASE_API_URL}/api/admin/products`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
+
+  const data = await response.json();
+
+  return NextResponse.json(data);
 }
