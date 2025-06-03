@@ -13,8 +13,10 @@ export const EventInitializer = () => {
       setLoading(true);
       try {
         const res = await fetch('/api/events');
-        const data: { events: ShopEvent[] } = await res.json();
-        setEvents(data.events);
+
+        const json: { data: { items: ShopEvent[] } } = await res.json();
+        const { items } = json.data;
+        setEvents(items);
       } catch (error) {
         console.error('Failed to fetch events', error);
         setEvents([]);

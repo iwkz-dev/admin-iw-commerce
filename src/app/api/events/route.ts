@@ -1,3 +1,4 @@
+import { auth } from '@/auth';
 import { NextResponse } from 'next/server';
 
 const mockEvents = [
@@ -30,11 +31,19 @@ const mockEvents = [
 ];
 
 export async function GET(): Promise<NextResponse> {
-  // if (error) {
-  //   return NextResponse.json({ error: error.message }, { status: 500 });
-  // }
+  const session = await auth();
 
-  return NextResponse.json({
-    events: mockEvents,
+  if (!session || !session.accessToken) {
+    return new NextResponse('Unauthorized', { status: 401 });
+  }
+  const accessToken = session.accessToken;
+  const response = await fetch(`${process.env.BASE_API_URL}/api/admin/events`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
+
+  const data = await response.json();
+
+  return NextResponse.json(data);
 }

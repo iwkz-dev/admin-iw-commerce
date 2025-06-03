@@ -59,6 +59,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         refreshToken: token.refreshToken as string,
         emailVerified: null,
       };
+      session.accessToken = token.accessToken as string;
+      session.refreshToken = token.refreshToken as string;
       return session;
     },
   },

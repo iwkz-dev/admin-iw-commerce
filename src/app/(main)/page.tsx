@@ -6,14 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useEventStore } from '@/store/eventStore';
 import { usePanelStore } from '@/store/panelStore';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import React from 'react';
 
 const Page = () => {
   const eventLoading = useEventStore((s) => s.loading);
   const events = useEventStore((s) => s.events);
   const selectedEvent = useEventStore((s) => s.selectedEvent);
-  const session = useSession();
   // const [open, setOpen] = useState(false);
 
   const { openPanel } = usePanelStore();
