@@ -26,14 +26,8 @@ jobs:
         with:
           node-version: 22.15.0
 
-      - name: 📥 Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.10.0
-          run_install: true
-
       - name: 🧹 Lint the code
-        run: pnpm run lint
+        run: npm run lint
 
       - name: 🔧 Build the project
-        run: pnpm run build
+        run: npm run build
