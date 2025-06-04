@@ -51,8 +51,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       // Attach custom values to session
       session.user = {
-        id: token.id,
-        name: token.name,
+        id: token.id as string,
+        name: token.name as string,
         email: token.email as string,
         role: token.role as string,
         accessToken: token.accessToken as string,
