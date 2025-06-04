@@ -11,7 +11,8 @@ import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors] = useState<{ email?: string; password?: string }>({}); // TODO: handle validation errors
+  // const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/';
 
@@ -30,7 +31,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
     //   return;
     // }
 
-    console.log('send data:', { email, password });
     await signIn('credentials', {
       email,
       password,
