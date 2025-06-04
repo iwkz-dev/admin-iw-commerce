@@ -1,5 +1,5 @@
 {
-  "engines": {
+  "engine": {
     "node": "22.15.0"
   },
   "name": "admin-iw-commerce",
