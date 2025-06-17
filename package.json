@@ -1,6 +1,6 @@
 {
   "engine": {
-    "node": "22.15.0"
+    "node": ">=22.15.0"
   },
   "name": "admin-iw-commerce",
   "version": "0.1.0",
